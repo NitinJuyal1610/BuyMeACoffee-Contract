@@ -24,9 +24,18 @@ contract BuyMeACofee{
    //owner address
    address payable owner;
 
+   //withdraw address
+   address payable depositAddress;
+
 
    constructor(){
       owner=payable(msg.sender);
+      depositAddress=payable(msg.sender);
+   }
+
+   function modifyDepositAddress(address payable _address) public{
+      require(msg.sender==owner,"You cannot do this");
+      depositAddress=_address;
    }
 
    function buyCofee( string memory _name,string memory _message) public payable  {
@@ -39,7 +48,7 @@ contract BuyMeACofee{
    }
 
    function withdrawTips()public{
-      require(owner.send( address(this).balance));
+      require(depositAddress.send( address(this).balance));
    }
 
    function getMemos() view public returns(Memo[]memory){

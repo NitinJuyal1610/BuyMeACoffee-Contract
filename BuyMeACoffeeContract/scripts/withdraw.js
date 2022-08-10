@@ -9,18 +9,19 @@ async function getBalance(provider, address) {
 }
 
 async function main() {
-  // Get the contract that has been deployed to Goerli.
-  const contractAddress = "0xa75E7EC84b801e7477f042C48ec05903F267BBad";
+  // Get the contract that has been deployed to Polygon.
+  const contractAddress = "0x31b939433a75da8AB3B77E316cAD402a95394e15";
   const contractABI = abi.abi;
 
   // Get the node connection and wallet connection.
   const provider = new hre.ethers.providers.AlchemyProvider(
-    "polygon",
+    "Goerli",
     process.env.ALCHEMY_KEY
   );
 
   // Ensure that signer is the SAME address as the original contract deployer,
   // or else this script will fail with an error.
+
   const signer = new hre.ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
   // Instantiate connected contract.
